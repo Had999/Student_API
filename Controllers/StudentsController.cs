@@ -12,10 +12,24 @@ namespace School_API.Controllers
             this.DbContext_V = DbContext_V;
         }
 
+
+
         [HttpGet]
         public IActionResult GetAll()
         {
             var x = DbContext_V.Students.ToList();
+            return Ok(x);
+        }
+
+
+        [HttpGet("{id}")]
+        public IActionResult GetById(Guid id)
+        {
+            var x = DbContext_V.Students.Find(id);
+            if (x == null)
+            {
+                return NotFound();
+            }
             return Ok(x);
         }
 
